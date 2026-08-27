@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Hardware tester module"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Oniro hardware tester"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "HW Tester"
+    },
+    {
+      "name": "mic_reason",
+      "value": "Record from the microphone to test audio capture"
+    }
+  ]
+}
