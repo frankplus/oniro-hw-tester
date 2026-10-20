@@ -15,6 +15,10 @@
     {
       "name": "mic_reason",
       "value": "Record from the microphone to test audio capture"
+    },
+    {
+      "name": "location_reason",
+      "value": "Get GNSS fixes to test the satellite receiver"
     }
   ]
 }

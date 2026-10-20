@@ -2,7 +2,7 @@
 
 A small ArkTS app for exercising device hardware from OpenHarmony / Oniro, one
 tab per subsystem. It was written to sanity-check a `hybris_generic` HAL port —
-audio, sensors, and vibrator — from on-device rather than by reading logs, so
+audio, sensors, vibrator, and GNSS — from on-device rather than by reading logs, so
 each tab surfaces raw values and errors instead of a pass/fail verdict.
 
 Developed and tested on a **Volla Plinius** running Oniro (API 23).
@@ -52,6 +52,21 @@ and vendor.
   marks each ✓ or ✗, and plays them individually — which is how you find out
   what the vibrator VDI actually maps versus what it merely accepts.
 
+### GNSS
+
+- **Start** asks for the location permissions and runs a continuous
+  `NAVIGATION` request, which the location framework serves from GNSS.
+- Shows satellites visible and used in the fix, the best C/N0, a count per
+  constellation, the NMEA sentence count, time to first fix, and the latest
+  position with its accuracy and source type, plus the time zones the offline
+  i18n map gives for the first fix.
+- The NMEA counter is what proves the receiver pipeline is alive. Indoors you
+  will usually see sentences arriving with zero satellites. A cold start needs
+  open sky and can take a few minutes.
+
+The location switch must be on. If the in-app prompt fails, turn it on in
+Settings → Privacy & security.
+
 ## Requirements
 
 - OpenHarmony SDK **API 23** (SDK 6.1) and the OpenHarmony command-line tools
@@ -77,8 +92,9 @@ oniro-app app launch
 If more than one device is attached, set `ONIRO_DEVICE_SERIAL` or pass
 `--device <serial>`.
 
-The app requests the microphone permission on first launch; the Sensors and
-Vibrator tabs need no runtime prompt.
+The app requests the microphone permission on first launch, and the GNSS tab
+asks for location when you press Start. The Sensors and Vibrator tabs need no
+runtime prompt.
 
 ## Pulling a recording
 
@@ -112,6 +128,7 @@ entry/src/main/
   ets/tabs/AudioTab.ets       render + capture
   ets/tabs/SensorsTab.ets     five sensors, live
   ets/tabs/VibratorTab.ets    durations + preset effects
+  ets/tabs/GnssTab.ets        satellites, NMEA, fixes
   module.json5                abilities and permissions
   resources/                  strings, colors, layered icon
 signatures/                   OpenHarmony test signing material

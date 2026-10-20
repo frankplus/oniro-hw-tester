@@ -1,4 +1,5 @@
 import { AudioTab } from '../tabs/AudioTab';
+import { GnssTab } from '../tabs/GnssTab';
 import { SensorsTab } from '../tabs/SensorsTab';
 import { VibratorTab } from '../tabs/VibratorTab';
 
@@ -42,6 +43,11 @@ struct Index {
           VibratorTab()
         }
         .tabBar(this.tabBarItem('Vibrator', 2))
+
+        TabContent() {
+          GnssTab()
+        }
+        .tabBar(this.tabBarItem('GNSS', 3))
       }
       .onChange((index: number) => {
         this.currentTab = index;
